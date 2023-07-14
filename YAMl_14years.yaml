@@ -1,0 +1,63 @@
+logging : 
+
+  verbosity : 3
+
+data:
+
+  evfile: binned_events.txt
+  scfile: L2209010905297F944B7037_SC00.fits
+  ltcube : ltcube_00.fits
+
+binning:
+
+  # Binning
+  roiwidth   : 10.0
+  npix       : null
+  binsz      : 0.1 # spatial bin size in deg
+  binsperdec : 8   # nb energy bins per decade
+  coordsys   : 'GAL'
+
+selection:
+
+  # Data selections
+  emin    : 500
+  emax    : 500000
+  zmax    : 100
+  evclass : 128
+  evtype  : 60
+  tmin    : 239557418
+  tmax    : 681407022 # 14 years
+  filter  : null
+
+  # Set the ROI center to these coordinates
+  ra: 210.028
+  dec: 14.4969
+
+gtlike:
+  # IRFs
+  edisp : True
+  irfs : 'P8R3_SOURCE_V3'
+  edisp_disable : ['isodiff','galdiff']
+
+# Settings for ROI model
+model:
+
+  # Include catalog sources within this distance from the ROI center
+  src_radius  : null
+
+  # Include catalog sources within a box of width roisrc.
+  src_roiwidth : 15.0
+
+  galdiff  : '$FERMI_DIFFUSE_DIR/gll_iem_v07.fits'
+  isodiff  : '$FERMI_DIFFUSE_DIR/iso_P8R3_SOURCE_V3_v1.txt'
+
+  # List of catalogs to be used in the model.
+  catalogs : '4FGL-DR3'
+
+  sources :
+    - { name : 'Bootes', ra : 210.028, dec : 14.4969, 
+        SpectrumType : 'PowerLaw', Index : 2.0, Prefactor : { 'value' : 0.0, 'scale' : 1e-13 } } 
+
+components: null
+
+
